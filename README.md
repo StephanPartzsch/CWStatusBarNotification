@@ -125,7 +125,33 @@ The default value for `notificationAnimationInStyle` is `CWNotificationAnimation
 
 The default value for `notificationAnimationOutStyle` is `CWNotificationAnimationStyleTop`.
 
-### Additional Remarks
+## Customizing Content
+
+If you need more then just a message, e.g. images, there are equivalent methods to display a notification with custom content instead of a message.
+These are:
+* `displayNotificationWithCustomContent:completion:`
+* `displayNotificationWithCustomContent:forDuration:`
+* `displayNotificationWithCustomContent:forDuration:dismissed:`
+
+Custom content means that you have to specify *everything* that gets displayed, even the background(Color).
+The `getNotificationFrame` method returns the dimensions of the notification regarding to the current `notificationStyle`.
+
+Example:
+```
+UIView *customView = [[UIView alloc] initWithFrame:[self.notification getNotificationFrame]];
+customView.backgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+
+UIView *redRectangle = [[UIView alloc] initWithFrame:CGRectMake(100, 15, 100, 30)];
+redRectangle.backgroundColor = [UIColor whiteColor];
+
+[customView addSubview:redRectangle];
+
+[self.notification displayNotificationWithCustomContent:customView forDuration:self.sliderDuration.value];
+```
+
+![custom content](screenshots/ss3.gif)
+
+## Additional Remarks
 
 The notifications will work in both screen orientations, however, screen rotation while a notification is displayed is not yet fully supported.
 

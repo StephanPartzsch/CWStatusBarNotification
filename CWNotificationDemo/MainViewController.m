@@ -42,6 +42,7 @@
     
     // set default blue color (since iOS 7.1, default window tintColor is black)
     self.notification.notificationLabelBackgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+	self.notification.notificationStyle = CWNotificationStyleNavigationBarNotification;
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,12 +72,17 @@
 
 - (IBAction)btnShowMultipleNotificationsPressed:(UIButton *)sender
 {
+	UIView *customView = [[UIView alloc] initWithFrame:[self.notification getNotificationFrame]];
+	customView.backgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+	UIView *redRectangle = [[UIView alloc] initWithFrame:CGRectMake(100, 15, 100, 30)];
+	redRectangle.backgroundColor = [UIColor whiteColor];
+	[customView addSubview:redRectangle];
+
 	self.notification.notificationAnimationInStyle = self.segFromStyle.selectedSegmentIndex;
 	self.notification.notificationAnimationOutStyle = self.segToStyle.selectedSegmentIndex;
-
-	[self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value dismissed:^{
+	[self.notification displayNotificationWithCustomContent:customView forDuration:self.sliderDuration.value dismissed:^{
 		NSLog(@"First Notification completely dismissed - Show next Notification");
-		[self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value];
+		[self.notification displayNotificationWithCustomContent:customView forDuration:self.sliderDuration.value];
 	}];
 }
 

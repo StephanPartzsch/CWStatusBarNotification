@@ -20,6 +20,7 @@
 		5E2FFB7218367C01003333F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2FFB5A18367C01003333F8 /* UIKit.framework */; };
 		5E2FFB8E18367CA3003333F8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2FFB8C18367CA3003333F8 /* MainViewController.m */; };
 		5E2FFB8F18367CA3003333F8 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E2FFB8D18367CA3003333F8 /* MainViewController.xib */; };
+		F25B2FBA80E9E117F801274A /* ScrollLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F25B24EE8A1E6B815DA74336 /* ScrollLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		5E2FFB8B18367CA3003333F8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		5E2FFB8C18367CA3003333F8 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		5E2FFB8D18367CA3003333F8 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		F25B24EE8A1E6B815DA74336 /* ScrollLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollLabel.m; sourceTree = SOURCE_ROOT; };
+		F25B2F3FF7EE6AD0FA842D05 /* ScrollLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollLabel.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +138,8 @@
 			children = (
 				5E0D045C1838AE0D00CBFC35 /* CWStatusBarNotification.h */,
 				5E0D045D1838AE0D00CBFC35 /* CWStatusBarNotification.m */,
+				F25B24EE8A1E6B815DA74336 /* ScrollLabel.m */,
+				F25B2F3FF7EE6AD0FA842D05 /* ScrollLabel.h */,
 			);
 			name = CWStatusBarNotification;
 			path = CWNotification;
@@ -260,6 +265,7 @@
 				5E2FFB6718367C01003333F8 /* AppDelegate.m in Sources */,
 				5E2FFB6318367C01003333F8 /* main.m in Sources */,
 				5E2FFB8E18367CA3003333F8 /* MainViewController.m in Sources */,
+				F25B2FBA80E9E117F801274A /* ScrollLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
