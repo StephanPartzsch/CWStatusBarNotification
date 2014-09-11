@@ -420,6 +420,11 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
     }
 }
 
+- (void)dismissNotification
+{
+	[self dismissNotificationWithFinishBlock:nil];
+}
+
 - (void)dismissNotificationWithFinishBlock:(void (^)(void))dismissed
 {
     if (self.notificationIsShowing) {
