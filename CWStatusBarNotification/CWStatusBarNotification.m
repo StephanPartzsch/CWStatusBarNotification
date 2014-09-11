@@ -11,7 +11,7 @@
 
 #define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
-#define STATUS_BAR_ANIMATION_LENGTH 1.25f
+#define STATUS_BAR_ANIMATION_LENGTH 0.25f
 #define FONT_SIZE 12.0f
 
 
