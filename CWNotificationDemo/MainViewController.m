@@ -65,18 +65,17 @@
 - (IBAction)btnShowNotificationPressed:(UIButton *)sender
 {
 	self.notification.notificationStyle = CWNotificationStyleStatusBarNotification;
-	self.notification.contenBottomOffset = 0.0f;
+	self.notification.contentBottomOffset = 0.0f;
 
     self.notification.notificationAnimationInStyle = self.segFromStyle.selectedSegmentIndex;
     self.notification.notificationAnimationOutStyle = self.segToStyle.selectedSegmentIndex;
-//    [self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value];
-    [self.notification displayNotificationWithMessage:self.txtNotificationMessage.text completion:nil];
+    [self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value];
 }
 
 - (IBAction)btnShowMultipleNotificationsPressed:(UIButton *)sender
 {
 	self.notification.notificationStyle = CWNotificationStyleNavigationBarNotification;
-	self.notification.contenBottomOffset = 5.0f;
+	self.notification.contentBottomOffset = 5.0f;
 
 	UIView *customView = [[UIView alloc] initWithFrame:[self.notification getContentFrame]];
 	customView.backgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
@@ -89,12 +88,10 @@
 	self.notification.notificationAnimationInStyle = self.segFromStyle.selectedSegmentIndex;
 	self.notification.notificationAnimationOutStyle = self.segToStyle.selectedSegmentIndex;
 
-	[self.notification displayNotificationWithCustomContent:customView completion:nil];
-
-//	[self.notification displayNotificationWithCustomContent:customView forDuration:self.sliderDuration.value dismissed:^{
-//		NSLog(@"First Notification completely dismissed - Show next Notification");
-//		[self.notification displayNotificationWithCustomContent:customView forDuration:self.sliderDuration.value];
-//	}];
+	[self.notification displayNotificationWithCustomContent:customView forDuration:self.sliderDuration.value dismissed:^{
+		NSLog(@"First Notification completely dismissed - Show next Notification");
+		[self.notification displayNotificationWithCustomContent:customView forDuration:self.sliderDuration.value];
+	}];
 }
 
 - (void)addShadowToView:(CALayer *)layer

@@ -19,7 +19,7 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
-	CGRect contentFrame = [_notificationDelegate getContentFrame];
+	CGRect contentFrame = [_notificationDelegate getNotificationFrame];
     if (point.x < contentFrame.origin.x || point.x > contentFrame.origin.x + contentFrame.size.width ||
 		point.y < contentFrame.origin.y || point.y > contentFrame.origin.y + contentFrame.size.height)
 	{
@@ -123,7 +123,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (CGRect)getContentFrame
 {
-    return CGRectMake(0, [self getStatusBarOffset], [self getStatusBarWidth], [self getNotificationHeight] - _contenBottomOffset);
+    return CGRectMake(0, [self getStatusBarOffset], [self getStatusBarWidth], [self getNotificationHeight] - _contentBottomOffset);
 }
 - (CGRect)getNotificationFrame
 {
@@ -202,7 +202,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 			height = [self getStatusBarHeight];
     }
 
-	return height + _contenBottomOffset;
+	return height + _contentBottomOffset;
 }
 
 # pragma mark - screen orientation change

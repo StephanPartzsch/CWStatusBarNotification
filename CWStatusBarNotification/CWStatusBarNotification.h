@@ -16,7 +16,7 @@ typedef void(^CWCompletionBlock)(void);
 
 
 @protocol CWStatusBarNotificationDelegate
-- (CGRect)getContentFrame;
+- (CGRect)getNotificationFrame;
 @end
 
 @interface CWWindowContainer : UIWindow
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 @property (nonatomic) BOOL notificationIsShowing;
 @property (nonatomic) BOOL notificationIsDismissing;
 
-@property (nonatomic) CGFloat contenBottomOffset;
+@property (nonatomic) CGFloat contentBottomOffset;
 
 @property (strong, nonatomic) ScrollLabel *notificationLabel;
 @property (strong, nonatomic) UIColor *notificationLabelBackgroundColor;
@@ -68,6 +68,7 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 
 
 - (CGRect)getContentFrame;
+- (CGRect)getNotificationFrame;
 
 - (void)displayNotificationWithMessage:(NSString *)message completion:(void (^)(void))completion;
 - (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration;

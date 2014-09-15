@@ -153,7 +153,7 @@ redRectangle.backgroundColor = [UIColor whiteColor];
 
 ### Add extension at the bottom, e.g. shadow
 
-If a shadow or some other addition is required at the bottom, just specify the `contentBottomOffset`. The `getContentFrame` method calculates the frame of the content without the offset, but the animation takes the offset into account.
+If a shadow or some other addition is required at the bottom, just specify the `contentBottomOffset`. The `getContentFrame` method calculates the frame of the content without the offset, but the animation uses the full notification frame. The last one can be accessed by calling `getNotificationFrame` method.
 
 See the following example for adding a shadow to the custom content view of a notification:
 ```
