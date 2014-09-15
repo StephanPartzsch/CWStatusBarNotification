@@ -138,7 +138,7 @@ The `getNotificationFrame` method returns the dimensions of the notification reg
 
 Example:
 ```
-UIView *customView = [[UIView alloc] initWithFrame:[self.notification getNotificationFrame]];
+UIView *customView = [[UIView alloc] initWithFrame:[self.notification getContentFrame]];
 customView.backgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
 
 UIView *redRectangle = [[UIView alloc] initWithFrame:CGRectMake(100, 15, 100, 30)];
@@ -150,6 +150,25 @@ redRectangle.backgroundColor = [UIColor whiteColor];
 ```
 
 ![custom content](screenshots/ss3.gif)
+
+### Add extension at the bottom, e.g. shadow
+
+If a shadow or some other addition is required at the bottom, just specify the `contentBottomOffset`. The `getContentFrame` method calculates the frame of the content without the offset, but the animation takes the offset into account.
+
+See the following example for adding a shadow to the custom content view of a notification:
+```
+self.notification.contenBottomOffset = 5.0f;
+
+UIView *customView = [[UIView alloc] initWithFrame:[self.notification getContentFrame]];
+customView.backgroundColor = [UIColor whiteColor];
+
+customView.layer.shadowOffset = CGSizeMake(1, 1);
+customView.layer.shadowColor = [[UIColor blackColor] CGColor];
+customView.layer.shadowRadius = 2.0f;
+customView.layer.shadowOpacity = 0.50f;
+customView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:layer.bounds] CGPath];
+
+```
 
 ## Additional Remarks
 

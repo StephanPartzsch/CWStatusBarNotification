@@ -42,7 +42,6 @@
     
     // set default blue color (since iOS 7.1, default window tintColor is black)
     self.notification.notificationLabelBackgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
-	self.notification.notificationStyle = CWNotificationStyleNavigationBarNotification;
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,6 +64,9 @@
 
 - (IBAction)btnShowNotificationPressed:(UIButton *)sender
 {
+	self.notification.notificationStyle = CWNotificationStyleStatusBarNotification;
+	self.notification.contenBottomOffset = 0.0f;
+
     self.notification.notificationAnimationInStyle = self.segFromStyle.selectedSegmentIndex;
     self.notification.notificationAnimationOutStyle = self.segToStyle.selectedSegmentIndex;
     [self.notification displayNotificationWithMessage:self.txtNotificationMessage.text forDuration:self.sliderDuration.value];
@@ -72,11 +74,16 @@
 
 - (IBAction)btnShowMultipleNotificationsPressed:(UIButton *)sender
 {
-	UIView *customView = [[UIView alloc] initWithFrame:[self.notification getNotificationFrame]];
+	self.notification.notificationStyle = CWNotificationStyleNavigationBarNotification;
+	self.notification.contenBottomOffset = 5.0f;
+
+	UIView *customView = [[UIView alloc] initWithFrame:[self.notification getContentFrame]];
 	customView.backgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
 	UIView *redRectangle = [[UIView alloc] initWithFrame:CGRectMake(100, 15, 100, 30)];
 	redRectangle.backgroundColor = [UIColor whiteColor];
 	[customView addSubview:redRectangle];
+
+	[self addShadowToView:customView.layer];
 
 	self.notification.notificationAnimationInStyle = self.segFromStyle.selectedSegmentIndex;
 	self.notification.notificationAnimationOutStyle = self.segToStyle.selectedSegmentIndex;
@@ -84,6 +91,15 @@
 		NSLog(@"First Notification completely dismissed - Show next Notification");
 		[self.notification displayNotificationWithCustomContent:customView forDuration:self.sliderDuration.value];
 	}];
+}
+
+- (void)addShadowToView:(CALayer *)layer
+{
+	layer.shadowOffset = CGSizeMake(1, 1);
+	layer.shadowColor = [[UIColor blackColor] CGColor];
+	layer.shadowRadius = 2.0f;
+	layer.shadowOpacity = 0.50f;
+	layer.shadowPath = [[UIBezierPath bezierPathWithRect:layer.bounds] CGPath];
 }
 
 @end

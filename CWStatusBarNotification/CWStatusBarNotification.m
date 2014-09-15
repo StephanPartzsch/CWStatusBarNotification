@@ -118,6 +118,10 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 # pragma mark - dimensions
 
+- (CGRect)getContentFrame
+{
+    return CGRectMake(0, [self getStatusBarOffset], [self getStatusBarWidth], [self getNotificationHeight] - _contenBottomOffset);
+}
 - (CGRect)getNotificationFrame
 {
     return CGRectMake(0, [self getStatusBarOffset], [self getStatusBarWidth], [self getNotificationHeight]);
@@ -182,14 +186,20 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 
 - (CGFloat)getNotificationHeight
 {
+	CGFloat height;
+
     switch (self.notificationStyle) {
         case CWNotificationStyleStatusBarNotification:
-            return [self getStatusBarHeight];
+			height = [self getStatusBarHeight];
+			break;
         case CWNotificationStyleNavigationBarNotification:
-            return [self getStatusBarHeight] + [self getNavigationBarHeight];
+			height = [self getStatusBarHeight] + [self getNavigationBarHeight];
+			break;
         default:
-            return [self getStatusBarHeight];
+			height = [self getStatusBarHeight];
     }
+
+	return height + _contenBottomOffset;
 }
 
 # pragma mark - screen orientation change
@@ -450,6 +460,8 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
             [self.notificationWindow setHidden:YES];
             self.notificationWindow = nil;
             self.contentContainer = nil;
+			self.customContentView = nil;
+			self.notificationLabel = nil;
             self.notificationIsShowing = NO;
             self.notificationIsDismissing = NO;
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
