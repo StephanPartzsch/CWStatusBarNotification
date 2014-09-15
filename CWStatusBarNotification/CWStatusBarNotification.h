@@ -9,14 +9,22 @@
 #import <Foundation/Foundation.h>
 
 @class ScrollLabel;
+@class CWStatusBarNotification;
+
 
 typedef void(^CWCompletionBlock)(void);
 
 
-@interface CWWindowContainer : UIWindow
+@protocol CWStatusBarNotificationDelegate
+- (CGRect)getContentFrame;
 @end
 
-@interface CWStatusBarNotification : NSObject
+@interface CWWindowContainer : UIWindow
+@property (nonatomic) id<CWStatusBarNotificationDelegate> notificationDelegate;
+@end
+
+
+@interface CWStatusBarNotification : NSObject <CWStatusBarNotificationDelegate>
 
 typedef NS_ENUM(NSInteger, CWNotificationStyle) {
     CWNotificationStyleStatusBarNotification,

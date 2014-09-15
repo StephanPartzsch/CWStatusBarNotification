@@ -19,11 +19,14 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
-    if (point.y > 0 && point.y < [UIApplication sharedApplication].statusBarFrame.size.height) {
-        return [super hitTest:point withEvent:event];
+	CGRect contentFrame = [_notificationDelegate getContentFrame];
+    if (point.x < contentFrame.origin.x || point.x > contentFrame.origin.x + contentFrame.size.width ||
+		point.y < contentFrame.origin.y || point.y > contentFrame.origin.y + contentFrame.size.height)
+	{
+        return nil;
     }
-    
-    return nil;
+
+	return [super hitTest:point withEvent:event];
 }
 
 @end
@@ -222,6 +225,7 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 - (void)createNotificationWindow
 {
 	self.notificationWindow = [[CWWindowContainer alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	self.notificationWindow.notificationDelegate = self;
 	self.notificationWindow.backgroundColor = [UIColor clearColor];
 	self.notificationWindow.userInteractionEnabled = YES;
 	self.notificationWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -233,6 +237,9 @@ static void cancel_delayed_block(CWDelayedBlockHandle delayedHandle)
 {
 	self.contentContainer = [UIView new];
 	contentContainer.clipsToBounds = YES;
+	contentContainer.userInteractionEnabled = YES;
+	[contentContainer addGestureRecognizer:self.tapGestureRecognizer];
+
 	switch (self.notificationAnimationInStyle) {
 		case CWNotificationAnimationStyleTop:
 			self.contentContainer.frame = [self getNotificationTopFrame];
